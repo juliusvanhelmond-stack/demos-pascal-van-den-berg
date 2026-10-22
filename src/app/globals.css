@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f7f5f0;
+  --color-sand: #ddd5c8;
+  --color-sand-soft: #ebe6dd;
+  --color-sage: #879482;
+  --color-sage-deep: #5f6b5a;
+  --color-ink: #252923;
+  --color-ink-soft: #3a3f37;
+  --color-muted: #555c51;
+  --color-muted-on-dark: #c9c4ba;
+
+  --font-serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Manrope Variable", "Manrope", system-ui, sans-serif;
+
+  /* Vijf typestappen */
+  --text-small: 0.875rem;
+  --text-body: 1.0625rem;
+  --text-lead: clamp(1.25rem, 1.05rem + 0.6vw, 1.5rem);
+  --text-title: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
+  --text-display: clamp(3rem, 1.6rem + 5.4vw, 6.75rem);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-sage);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-paper);
+  }
+  img {
+    -webkit-user-drag: none;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    transition:
+      background-color 200ms var(--ease-out-soft),
+      color 200ms var(--ease-out-soft),
+      transform 200ms var(--ease-out-soft);
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.99);
+  }
+  .btn-ink {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-ink:hover {
+    background: var(--color-sage-deep);
+  }
+  .btn-paper {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  .btn-paper:hover {
+    background: var(--color-sand);
+  }
+  .btn-sand {
+    background: var(--color-sand);
+    color: var(--color-ink);
+  }
+  .btn-sand:hover {
+    background: var(--color-sand-soft);
+  }
+  .btn .btn-arrow {
+    transition: transform 250ms var(--ease-out-soft);
+  }
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .link-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-color 200ms, color 200ms;
+  }
+  .link-underline:hover {
+    text-decoration-color: var(--color-sage);
+  }
+
+  /* Gekartelde rand van het kluslijstvel */
+  .sheet-edge {
+    --z: 10px;
+    clip-path: polygon(
+      0 var(--z),
+      2.5% 0,
+      5% var(--z),
+      7.5% 0,
+      10% var(--z),
+      12.5% 0,
+      15% var(--z),
+      17.5% 0,
+      20% var(--z),
+      22.5% 0,
+      25% var(--z),
+      27.5% 0,
+      30% var(--z),
+      32.5% 0,
+      35% var(--z),
+      37.5% 0,
+      40% var(--z),
+      42.5% 0,
+      45% var(--z),
+      47.5% 0,
+      50% var(--z),
+      52.5% 0,
+      55% var(--z),
+      57.5% 0,
+      60% var(--z),
+      62.5% 0,
+      65% var(--z),
+      67.5% 0,
+      70% var(--z),
+      72.5% 0,
+      75% var(--z),
+      77.5% 0,
+      80% var(--z),
+      82.5% 0,
+      85% var(--z),
+      87.5% 0,
+      90% var(--z),
+      92.5% 0,
+      95% var(--z),
+      97.5% 0,
+      100% var(--z),
+      100% 100%,
+      0 100%
+    );
+  }
+
+  .leader {
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    margin: 0 0.75rem 0.4em;
+    border-bottom: 3px dotted color-mix(in srgb, var(--color-ink) 35%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scroll reveals: alleen actief als JavaScript draait, zodat content nooit verborgen blijft. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 800ms var(--ease-out-soft),
+    transform 800ms var(--ease-out-soft);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js [data-reveal="image"] {
+  transform: scale(1.04);
+  clip-path: inset(6% 0 0 0);
+  transition:
+    opacity 900ms var(--ease-out-soft),
+    transform 1200ms var(--ease-out-soft),
+    clip-path 1100ms var(--ease-out-soft);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal="image"] {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
+
+/* Zachte zoom op projectfoto's */
+.zoom-img {
+  transition: transform 900ms var(--ease-out-soft);
+}
+.group:hover .zoom-img,
+.group:focus-visible .zoom-img {
+  transform: scale(1.035);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
